@@ -8,17 +8,15 @@ contract('StarNotary' , (accs) => {
    owner = accounts[0];
 });
 
-beforeEach(async function() {
-  let instance = await StarNotary.deployed();
-});
-
 it('can Create a Star', async () => {
   let tokenId = 1;
+  let instance = await StarNotary.deployed();
   await instance.createStar("Awesome Star", tokenId, {from: accounts[0]});
   assert.equal(await instance.tokenIdToStarInfo.call(tokenId), 'Awesome Star');
 });
 
 it('lets user1 put their star up for sale', async () => {
+  let instance = await StarNotary.deployed();
   let user1 = accounts[1];
   let starId = 2;
   let starPrice = web3.utils.toWei(".01", "ether");
@@ -28,6 +26,7 @@ it('lets user1 put their star up for sale', async () => {
 });
 
 it('lets user1 get the funds after the sale', async () => {
+  let instance = await StarNotary.deployed();
   let user1 = accounts[1];
   let user2 = accounts[2];
   let starId = 3;
@@ -44,6 +43,7 @@ it('lets user1 get the funds after the sale', async () => {
 });
 
 it('lets user2 buy a star if it is up for sale and own it', async () => {
+  let instance = await StarNotary.deployed();
   let user1 = accounts[1];
   let user2 = accounts[2];
   let starId = 4;
@@ -56,6 +56,7 @@ it('lets user2 buy a star if it is up for sale and own it', async () => {
 });
 
 it('lets user2 buy a star and decreases its balance in ether', async () => {
+  let instance = await StarNotary.deployed();
   let user1 = accounts[1];
   let user2 = accounts[2];
   let starId = 5;
